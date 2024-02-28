@@ -18,7 +18,7 @@ def main():
         if body:
             summary = generate_summary(body)
             st.subheader("Summary:")
-            st.write(summary)  # Display the summary
+            st.write(summary[0])  # Display the summary instead of vector values
         else:
             st.warning("Please enter some text to summarize.")
 
