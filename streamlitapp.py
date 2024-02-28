@@ -23,13 +23,42 @@ def download_summary(summary_text):
     href = f'<a href="data:file/txt;base64,{b64}" download="summary.txt">Download Summary</a>'
     st.markdown(href, unsafe_allow_html=True)
 
+# CSS styling for the home page
+def home_css():
+    css = """
+    <style>
+    body {
+        background-color: #f0f2f6;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        text-align: center;
+    }
+    h1 {
+        color: #333;
+    }
+    p {
+        color: #666;
+    }
+    </style>
+    """
+    st.markdown(css, unsafe_allow_html=True)
+
 # Home page
 def home():
+    home_css()  # Apply CSS styling
     st.title("Welcome to Text Summarization")
     st.write("""
     This is a simple Streamlit app that demonstrates text summarization using SBERT (Sentence-BERT) models.
     Choose the 'Predict' page from the sidebar to enter text and generate a summary.
     """)
+    st.image("https://via.placeholder.com/350", use_column_width=True)
 
 # Predict page
 def predict():
