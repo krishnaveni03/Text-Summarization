@@ -49,6 +49,13 @@ def predict():
             else:
                 st.warning("Please enter some text to summarize.")
 
+                # Clear the output
+                st.subheader("Summary (SBERT):")
+                st.write("")
+
+                st.subheader("Summary (SBertSummarizer):")
+                st.write("")
+
 def main():
     predict()
 
