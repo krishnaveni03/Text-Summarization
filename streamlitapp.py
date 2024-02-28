@@ -1,7 +1,6 @@
 import streamlit as st
 from summarizer.sbert import SBertSummarizer
 from sentence_transformers import SentenceTransformer
-import os
 
 # Load SBERT model for encoding
 sbert_model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
@@ -23,6 +22,11 @@ def download_summary(summary_text):
         f.write(summary_text)
     st.success("Summary has been downloaded as 'summary.txt'")
 
+# CSS styling
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
 # Home page
 def home():
     st.title("Welcome to Text Summarization")
@@ -31,40 +35,38 @@ def home():
     Choose the 'Predict' page from the sidebar to enter text and generate a summary.
     """)
 
-    st.write("## Upload a Text File")
-    uploaded_file = st.file_uploader("Choose a file", type=['txt'])
-    if uploaded_file is not None:
-        file_contents = uploaded_file.read()
-        st.write("## File Content:")
-        st.write(file_contents)
-
-        if st.button("Generate Summary"):
-            summary_sbertsummarizer = generate_summary_sbertsummarizer(file_contents)
-            st.subheader("Summary (SBertSummarizer):")
-            st.write(summary_sbertsummarizer)
-
-            if st.button("Download Summary"):
-                download_summary(summary_sbertsummarizer.decode("utf-8"))
-
 # Predict page
 def predict():
+    local_css("style.css")  # Load local CSS file
     st.title("Text Summarization")
     st.sidebar.title("Navigation")
     page = st.sidebar.radio("Go to", ("Home", "Predict"))
 
-    if page == "Home":
-        home()
-    elif page == "Predict":
+    if page == "Predict":
         st.subheader("Generate Summary")
-        body = st.text_area("Enter the text to summarize:")
+        option = st.radio("Choose option", ("Enter Text", "Upload Text File"))
+
+        if option == "Enter Text":
+            body = st.text_area("Enter the text to summarize:")
+        elif option == "Upload Text File":
+            uploaded_file = st.file_uploader("Choose a file", type=['txt'])
+            if uploaded_file is not None:
+                body = uploaded_file.read().decode("utf-8")
+            else:
+                body = ""
+
         if st.button("Generate Summary"):
             if body:
                 summary_sbertsummarizer = generate_summary_sbertsummarizer(body)
                 st.subheader("Summary (SBertSummarizer):")
                 st.write(summary_sbertsummarizer)
+
+                if st.button("Download Summary"):
+                    download_summary(summary_sbertsummarizer.decode("utf-8"))
             else:
                 st.warning("Please enter some text to summarize.")
 
+# Main function
 def main():
     predict()
 
