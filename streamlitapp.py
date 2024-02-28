@@ -38,9 +38,9 @@ def predict():
         if st.button("Generate Summary"):
             if body:
                 # Generate summary using SBERT
-                summary_sbert = generate_summary_sbert(body)
-                st.subheader("Summary (SBERT):")
-                st.write(summary_sbert)
+                # summary_sbert = generate_summary_sbert(body)
+                # st.subheader("Summary (SBERT):")
+                # st.write(summary_sbert)
 
                 # Generate summary using SBertSummarizer
                 summary_sbertsummarizer = generate_summary_sbertsummarizer(body)
