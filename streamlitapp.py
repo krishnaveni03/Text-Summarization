@@ -58,7 +58,6 @@ def home():
     This is a simple Streamlit app that demonstrates text summarization using SBERT (Sentence-BERT) models.
     Choose the 'Predict' page from the sidebar to enter text and generate a summary.
     """)
-    st.image("https://via.placeholder.com/350", use_column_width=True)
 
 # Predict page
 def predict():
