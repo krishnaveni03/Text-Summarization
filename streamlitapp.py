@@ -37,11 +37,6 @@ def predict():
         body = st.text_area("Enter the text to summarize:")
         if st.button("Generate Summary"):
             if body:
-                # Generate summary using SBERT
-                # summary_sbert = generate_summary_sbert(body)
-                # st.subheader("Summary (SBERT):")
-                # st.write(summary_sbert)
-
                 # Generate summary using SBertSummarizer
                 summary_sbertsummarizer = generate_summary_sbertsummarizer(body)
                 st.subheader("Summary (SBertSummarizer):")
@@ -49,14 +44,32 @@ def predict():
             else:
                 st.warning("Please enter some text to summarize.")
 
-                # Clear the output
-                st.subheader("Summary (SBERT):")
-                st.write("")
-
-                st.subheader("Summary (SBertSummarizer):")
-                st.write("")
-
 def main():
+    # Add some CSS for styling
+    st.markdown(
+        """
+        <style>
+        /* Add some CSS for styling */
+        .stButton>button {
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .stTextInput>div>div>textarea {
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-size: 16px;
+            resize: vertical;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
     predict()
 
 if __name__ == "__main__":
