@@ -1,6 +1,7 @@
 import streamlit as st
 from summarizer.sbert import SBertSummarizer
 from sentence_transformers import SentenceTransformer
+import base64
 
 # Load SBERT model for encoding
 sbert_model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
@@ -18,14 +19,9 @@ def generate_summary_sbertsummarizer(body):
 
 # Function to download summary as a text file
 def download_summary(summary_text):
-    with open("summary.txt", "w") as f:
-        f.write(summary_text)
-    st.success("Summary has been downloaded as 'summary.txt'")
-
-# CSS styling
-def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+    b64 = base64.b64encode(summary_text.encode()).decode()
+    href = f'<a href="data:file/txt;base64,{b64}" download="summary.txt">Download Summary</a>'
+    st.markdown(href, unsafe_allow_html=True)
 
 # Home page
 def home():
@@ -37,12 +33,13 @@ def home():
 
 # Predict page
 def predict():
-    local_css("style.css")  # Load local CSS file
     st.title("Text Summarization")
     st.sidebar.title("Navigation")
     page = st.sidebar.radio("Go to", ("Home", "Predict"))
 
-    if page == "Predict":
+    if page == "Home":
+        home()
+    elif page == "Predict":
         st.subheader("Generate Summary")
         option = st.radio("Choose option", ("Enter Text", "Upload Text File"))
 
