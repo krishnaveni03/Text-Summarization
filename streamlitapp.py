@@ -8,7 +8,7 @@ model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
 def generate_summary(body):
     # Perform summarization using the SBERT model
     # This is just a placeholder; actual implementation may vary
-    summary = model.encode(body, convert_to_tensor=True)
+    summary = model.encode(body, convert_to_tensor=False)
     return summary
 
 def main():
@@ -18,7 +18,7 @@ def main():
         if body:
             summary = generate_summary(body)
             st.subheader("Summary:")
-            st.write(summary)
+            st.write(summary)  # Display the summary
         else:
             st.warning("Please enter some text to summarize.")
 
