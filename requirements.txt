@@ -1,6 +1,6 @@
-streamlit==0.88.0
-summarizer==0.0.7
-torch==1.9.1
-transformers==4.11.3
-sentence-transformers==2.0.0
+streamlit
+summarizer
+torch
+transformers
+sentence-transformers
 
