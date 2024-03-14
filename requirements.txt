@@ -1,4 +1,5 @@
 streamlit
+pip install bert-extractive-summarizer
 sentence-transformers
 numpy
 pandas
