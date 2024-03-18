@@ -3,8 +3,8 @@ bert-extractive-summarizer
 sentence-transformers
 numpy
 pandas
-streamlit
+streamlit==1.31.1
 tensorflow
 transformers
-bert-extractive-summarizer
-os
+
+
