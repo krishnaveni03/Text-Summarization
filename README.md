@@ -4,7 +4,7 @@ This is a simple web application for text summarization. It takes input text and
 
 ## Usage
 
-1. Navigate to [the web app](https://text-summarization-9td.streamlit.app/).
+1. Navigate to https://text-summarization12.streamlit.app/
 2. Paste or type the text you want to summarize into the input box.
 3. Also you can upload the text document
 4. Click on the "Summarize" button.
